@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scrazino</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class', // or 'media'
+      theme: {
+        extend: {
+          colors: {
+            'scrazino-yellow': {
+              light: '#facc15', // yellow-400
+              DEFAULT: '#eab308', // yellow-500
+              dark: '#d97706' // amber-600
+            },
+            'scrazino-gray': {
+              '50': '#f9fafb',
+              '100': '#f3f4f6',
+              '200': '#e5e7eb',
+              '300': '#d1d5db',
+              '400': '#9ca3af',
+              '500': '#6b7280',
+              '600': '#4b5563',
+              '700': '#374151',
+              '800': '#1f2937',
+              '900': '#111827'
+            }
+          },
+          animation: {
+            'logo-pulse': 'logoPulse 2s infinite ease-in-out',
+            'logo-letter-reveal': 'logoLetterReveal 0.5s ease-out forwards',
+            'spin': 'spin 1s linear infinite',
+            'wheel-spin': 'wheelSpin 3s cubic-bezier(0.25, 1, 0.5, 1) forwards',
+            'coin-flip': 'coinFlip 1s ease-out forwards',
+            'slot-reel-spin': 'slotReelSpin 0.1s linear infinite',
+          },
+          keyframes: {
+            logoPulse: {
+              '0%, 100%': { textShadow: '0 0 5px theme("colors.scrazino-yellow.DEFAULT")', opacity: '0.8' },
+              '50%': { textShadow: '0 0 15px theme("colors.scrazino-yellow.light")', opacity: '1' },
+            },
+            logoLetterReveal: {
+              '0%': { opacity: '0', transform: 'translateY(10px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            wheelSpin: {
+              '0%': { transform: 'rotate(0deg)' },
+              '100%': { transform: 'rotate(calc(360deg * 3 + var(--final-rotation, 0deg)))' }, // var must be set by style
+            },
+            coinFlip: {
+              '0%': { transform: 'rotateY(0deg)' },
+              '50%': { transform: 'rotateY(900deg)' }, // Multiple spins
+              '100%': { transform: 'rotateY(1800deg)' }, // Ends on the "result" side
+            },
+            slotReelSpin: {
+              '0%': { transform: 'translateY(0)' },
+              '100%': { transform: 'translateY(-100%)' }, // Adjust based on symbol height
+            }
+          }
+        }
+      }
+    }
+  </script>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.1.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "react-router-dom": "https://esm.sh/react-router-dom@^6.23.1",
+    "react/": "https://esm.sh/react@^19.1.0/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-scrazino-gray-100 dark:bg-scrazino-gray-900 transition-colors duration-300">
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
